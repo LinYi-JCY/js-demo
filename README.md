@@ -1,3 +1,3 @@
-## js-demo
+## web-demo
 
-> Some js effects
+> Some web effects, such as js, html, css
