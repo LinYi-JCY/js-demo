@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            cursor: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+
+<script>
+    var box = document.getElementById('box');
+    var boxWidth = parseInt(getComputedStyle(box).width);
+    var boxHeight = parseInt(getComputedStyle(box).height);
+    // 窗口宽高
+    var winWidth = window.innerWidth;
+    var winHeight = window.innerHeight;
+
+    var boxLeft, boxTop;
+
+    var timer, speed = 20, dis, isRight = true;
+
+    // 鼠标移动事件
+    document.addEventListener('mousemove', function (e) {
+        // 鼠标坐标
+        var x = e.clientX - (boxWidth / 2);
+        var y = e.clientY - (boxHeight / 2);
+        // box 坐标
+        var boxLeft = x + boxWidth;
+        var boxTop = y + boxWidth;
+        var boxLeftVal = winWidth - boxWidth;
+        var boxTopVal = winHeight - boxHeight;
+
+        // 左边界检测
+        if (x <= 0) {
+            x = 0;
+        } else if (boxLeft >= winWidth) {
+            x = boxLeftVal;
+        }
+        box.style.left = x + 'px';
+
+        // 上边界检测
+        if (y <= 0) {
+            y = 0;
+        } else if (boxTop >= winHeight) {
+            y = boxTopVal;
+        }
+        box.style.top = y + 'px';
+    });
+
+    // function boxMove() {
+    //     timer = setInterval(() => {
+    //         // 获取 box 目前的位置
+    //         boxLeft = box.offsetLeft + boxWidth;
+    //         boxTop = box.offsetTop + boxWidth;
+
+    //         if (isRight && boxLeft <= winWidth) {
+    //             dis = box.offsetLeft + 5;
+    //         } else if (!isRight && boxLeft === boxWidth) {
+    //             isRight = true;
+    //         } else {
+    //             isRight = false;
+    //             dis = box.offsetLeft - 5;
+    //         }
+
+    //         if (!isRight && boxLeft === boxWidth) {
+
+    //         }
+
+    //         box.style.left = dis + 'px';
+    //     }, speed);
+    // }
+
+    // boxMove();
+
+    // class StringBuilder {
+    //     constructor() {
+    //         this.data = [];
+    //     }
+
+    //     append(text) {
+    //         this.data.push(text);
+    //         return this;
+    //     }
+
+    //     toString(sign) {
+    //         if (sign) {
+    //             return this.data.join(sign);
+    //         }
+    //         return this.data.join('');
+    //     }
+
+    //     isEmpty() {
+    //         return this.data.length <= 0;
+    //     }
+
+    //     clear() {
+    //         this.data = [];
+    //         this.data.length = 0;
+    //     }
+    // }
+
+    // var begin = new Date();
+
+    // var sb = new StringBuilder();
+    // for (var i = 0; i < 10000000; i++) {
+    //     sb.append('hello');
+    // }
+    // var str3 = sb.toString();
+
+    // var end = new Date();
+    // var result = (end - begin) / 1000.0;
+    // console.log('spend time ... ' + result.toFixed(2) + 's')
+</script>
+
+</html>
